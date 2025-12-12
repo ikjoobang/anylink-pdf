@@ -17,52 +17,72 @@ export function mainPage() {
     
     /* Custom scrollbar */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #09090b;
     }
     ::-webkit-scrollbar-thumb {
-      background: #0d9488;
-      border-radius: 4px;
+      background: #27272a;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
     }
     
-    /* Gradient backgrounds - Soft slate/dark blue */
+    /* Background - Pure dark with subtle noise texture feel */
     .gradient-bg {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      background: #09090b;
+      position: relative;
+    }
+    .gradient-bg::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent);
+      pointer-events: none;
     }
     
-    /* Primary gradient - Teal/Cyan */
+    /* Primary gradient - Subtle indigo/white */
     .gradient-text {
-      background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 50%, #22d3ee 100%);
+      background: linear-gradient(135deg, #e4e4e7 0%, #a1a1aa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
-    /* Secondary gradient - Soft blue */
-    .gradient-text-blue {
-      background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+    /* Accent gradient - Soft indigo */
+    .gradient-text-accent {
+      background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
-    /* Animated gradient border - Teal tones */
+    /* Card style - Glass morphism */
+    .glass-card {
+      background: rgba(24, 24, 27, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(63, 63, 70, 0.5);
+      border-radius: 20px;
+    }
+    
+    /* Animated gradient border - Minimal */
     .gradient-border {
       position: relative;
-      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      background: rgba(24, 24, 27, 0.9);
+      backdrop-filter: blur(20px);
       border-radius: 24px;
     }
     .gradient-border::before {
       content: '';
       position: absolute;
-      inset: -2px;
-      background: linear-gradient(135deg, #14b8a6, #06b6d4, #0ea5e9, #14b8a6);
-      border-radius: 26px;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.3), rgba(99, 102, 241, 0.5));
+      border-radius: 25px;
       z-index: -1;
-      background-size: 300% 300%;
-      animation: gradientMove 4s ease infinite;
+      background-size: 200% 200%;
+      animation: gradientMove 6s ease infinite;
     }
     
     @keyframes gradientMove {
@@ -70,53 +90,46 @@ export function mainPage() {
       50% { background-position: 100% 50%; }
     }
     
-    /* Glow effects - Teal */
-    .glow-primary {
-      box-shadow: 0 0 40px rgba(20, 184, 166, 0.25),
-                  0 0 80px rgba(20, 184, 166, 0.1);
-    }
-    
-    .glow-blue {
-      box-shadow: 0 0 40px rgba(14, 165, 233, 0.25),
-                  0 0 80px rgba(14, 165, 233, 0.1);
+    /* Subtle glow */
+    .glow-subtle {
+      box-shadow: 0 0 60px rgba(99, 102, 241, 0.1),
+                  0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
     
     /* Floating animation */
     @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(2deg); }
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
     }
     
     .float-animation {
-      animation: float 6s ease-in-out infinite;
+      animation: float 8s ease-in-out infinite;
     }
     
     .float-animation-delayed {
-      animation: float 6s ease-in-out infinite;
-      animation-delay: -3s;
+      animation: float 8s ease-in-out infinite;
+      animation-delay: -4s;
     }
     
-    /* Pulse animation - Teal */
+    /* Pulse animation - Very subtle */
     @keyframes pulse-glow {
       0%, 100% { 
-        box-shadow: 0 0 20px rgba(20, 184, 166, 0.3),
-                    0 0 40px rgba(20, 184, 166, 0.15);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
       }
       50% { 
-        box-shadow: 0 0 40px rgba(20, 184, 166, 0.4),
-                    0 0 80px rgba(20, 184, 166, 0.2);
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.25);
       }
     }
     
     .pulse-glow {
-      animation: pulse-glow 2s ease-in-out infinite;
+      animation: pulse-glow 3s ease-in-out infinite;
     }
     
     /* Slide up animation */
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -125,29 +138,28 @@ export function mainPage() {
     }
     
     .slide-up {
-      animation: slideUp 0.8s ease-out forwards;
+      animation: slideUp 0.6s ease-out forwards;
     }
     
     .slide-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
     .slide-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
     .slide-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
-    .slide-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
-    .slide-up-delay-5 { animation-delay: 0.5s; opacity: 0; }
     
-    /* Platform badge hover - Teal */
+    /* Platform badge hover */
     .platform-badge {
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
     }
     .platform-badge:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 10px 40px rgba(20, 184, 166, 0.2);
+      transform: translateY(-2px);
+      background: rgba(63, 63, 70, 0.5);
+      border-color: rgba(99, 102, 241, 0.3);
     }
     
-    /* Input focus glow - Teal */
+    /* Input focus */
     .input-glow:focus {
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2),
-                  0 0 40px rgba(20, 184, 166, 0.15);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
     }
     
     /* Button shine effect */
@@ -164,25 +176,25 @@ export function mainPage() {
       height: 200%;
       background: linear-gradient(
         45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 70%
+        transparent 40%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 60%
       );
       transform: rotate(45deg) translateX(-100%);
-      transition: transform 0.6s ease;
+      transition: transform 0.5s ease;
     }
     .btn-shine:hover::after {
       transform: rotate(45deg) translateX(100%);
     }
     
-    /* Progress bar animation */
-    @keyframes progress-glow {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.2); }
+    /* Progress bar */
+    .progress-glow {
+      animation: progress-glow 2s ease-in-out infinite;
     }
     
-    .progress-glow {
-      animation: progress-glow 1.5s ease-in-out infinite;
+    @keyframes progress-glow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
     }
     
     /* Spinner */
@@ -193,15 +205,16 @@ export function mainPage() {
       animation: spin 1s linear infinite;
     }
     
-    /* Card hover effect */
+    /* Card hover */
     .card-hover {
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.3s ease;
     }
     .card-hover:hover {
-      transform: translateY(-8px);
+      transform: translateY(-4px);
+      border-color: rgba(99, 102, 241, 0.3);
     }
     
-    /* Particles background */
+    /* Particles - Very subtle */
     .particles {
       position: fixed;
       top: 0;
@@ -215,11 +228,11 @@ export function mainPage() {
     
     .particle {
       position: absolute;
-      width: 4px;
-      height: 4px;
-      background: rgba(20, 184, 166, 0.25);
+      width: 2px;
+      height: 2px;
+      background: rgba(99, 102, 241, 0.3);
       border-radius: 50%;
-      animation: particleFloat 15s infinite ease-in-out;
+      animation: particleFloat 20s infinite ease-in-out;
     }
     
     @keyframes particleFloat {
@@ -228,11 +241,11 @@ export function mainPage() {
         opacity: 0;
       }
       10% {
-        opacity: 1;
+        opacity: 0.5;
         transform: translateY(90vh) translateX(10px) scale(1);
       }
       90% {
-        opacity: 1;
+        opacity: 0.5;
         transform: translateY(10vh) translateX(-10px) scale(1);
       }
       100% {
@@ -241,40 +254,34 @@ export function mainPage() {
       }
     }
     
-    /* Option checkbox style - Teal */
+    /* Option checkbox */
     .option-checkbox {
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
     .option-checkbox:hover {
-      background: rgba(20, 184, 166, 0.08);
+      background: rgba(63, 63, 70, 0.3);
     }
     
-    /* Detected platform animation */
+    /* Detect pulse */
     @keyframes detectPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+      0% { transform: scale(1); opacity: 0; }
+      50% { transform: scale(1.02); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
     }
     
     .detect-pulse {
-      animation: detectPulse 0.5s ease-out;
+      animation: detectPulse 0.4s ease-out;
     }
     
-    /* Success checkmark animation */
+    /* Checkmark */
     @keyframes checkmark {
-      0% { 
-        stroke-dashoffset: 100;
-        opacity: 0;
-      }
-      100% { 
-        stroke-dashoffset: 0;
-        opacity: 1;
-      }
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
     }
     
     .checkmark-animate {
       stroke-dasharray: 100;
-      animation: checkmark 0.6s ease-out forwards;
+      animation: checkmark 0.5s ease-out forwards;
     }
     
     /* Confetti */
@@ -291,37 +298,32 @@ export function mainPage() {
     
     .confetti {
       position: fixed;
-      width: 10px;
-      height: 10px;
-      animation: confetti-fall 3s ease-out forwards;
+      width: 8px;
+      height: 8px;
+      animation: confetti-fall 2.5s ease-out forwards;
       z-index: 1000;
     }
     
-    /* View mode buttons - Teal */
+    /* View mode buttons */
     .view-mode-btn {
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
     .view-mode-btn.active {
-      background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
-      color: white;
+      background: rgba(99, 102, 241, 0.2);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.3);
     }
     .view-mode-btn:not(.active):hover {
-      background: rgba(20, 184, 166, 0.08);
+      background: rgba(63, 63, 70, 0.3);
     }
     
-    /* Accent colors */
-    .accent-teal {
-      color: #14b8a6;
-    }
-    .accent-cyan {
-      color: #06b6d4;
-    }
-    .accent-sky {
-      color: #0ea5e9;
+    /* Custom checkbox */
+    input[type="checkbox"] {
+      accent-color: #6366f1;
     }
   </style>
 </head>
-<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+<body class="gradient-bg min-h-screen text-zinc-100 overflow-x-hidden">
   <!-- Particles Background -->
   <div class="particles" id="particles"></div>
   
@@ -331,122 +333,119 @@ export function mainPage() {
     <header class="py-6 px-4">
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         <div class="flex items-center gap-3 slide-up">
-          <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
-            <i class="fas fa-file-pdf text-white"></i>
+          <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
+            <i class="fas fa-file-pdf text-white text-sm"></i>
           </div>
-          <span class="text-xl font-bold">AnyLink<span class="text-teal-400">PDF</span></span>
+          <span class="text-lg font-semibold text-zinc-100">AnyLink<span class="text-indigo-400">PDF</span></span>
         </div>
         <nav class="flex items-center gap-6 slide-up slide-up-delay-1">
-          <a href="#features" class="text-slate-400 hover:text-white transition-colors">기능</a>
-          <a href="#platforms" class="text-slate-400 hover:text-white transition-colors">지원 플랫폼</a>
-          <button class="px-4 py-2 bg-teal-600/20 border border-teal-500/30 rounded-lg hover:bg-teal-600/30 transition-all">
-            <i class="fas fa-crown mr-2 text-amber-400"></i>Pro
+          <a href="#features" class="text-zinc-500 hover:text-zinc-300 transition-colors text-sm">기능</a>
+          <a href="#platforms" class="text-zinc-500 hover:text-zinc-300 transition-colors text-sm">플랫폼</a>
+          <button class="px-3 py-1.5 bg-zinc-800/50 border border-zinc-700/50 rounded-lg hover:bg-zinc-800 transition-all text-sm text-zinc-400">
+            <i class="fas fa-crown mr-1.5 text-amber-500 text-xs"></i>Pro
           </button>
         </nav>
       </div>
     </header>
     
     <!-- Hero Section -->
-    <section class="py-16 px-4">
-      <div class="max-w-4xl mx-auto text-center">
+    <section class="py-20 px-4">
+      <div class="max-w-3xl mx-auto text-center">
         <!-- Floating decorations -->
-        <div class="absolute left-10 top-40 w-20 h-20 bg-teal-500/10 rounded-full blur-xl float-animation"></div>
-        <div class="absolute right-10 top-60 w-32 h-32 bg-cyan-500/10 rounded-full blur-xl float-animation-delayed"></div>
+        <div class="absolute left-20 top-40 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl float-animation"></div>
+        <div class="absolute right-20 top-60 w-48 h-48 bg-violet-500/5 rounded-full blur-3xl float-animation-delayed"></div>
         
-        <h1 class="text-5xl md:text-7xl font-black mb-6 slide-up">
-          <span class="gradient-text">Any Link</span>
-          <span class="text-white"> to </span>
-          <span class="gradient-text-blue">PDF</span>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-up tracking-tight">
+          <span class="text-zinc-100">Any Link to </span>
+          <span class="gradient-text-accent">PDF</span>
         </h1>
         
-        <p class="text-xl md:text-2xl text-slate-400 mb-4 slide-up slide-up-delay-1">
-          어떤 웹 링크든 <span class="text-teal-400 font-semibold">고품질 PDF</span>로 변환
+        <p class="text-lg text-zinc-400 mb-3 slide-up slide-up-delay-1">
+          어떤 웹 링크든 고품질 PDF로 변환
         </p>
         
-        <p class="text-slate-500 mb-12 slide-up slide-up-delay-2">
-          Canva, Figma, Notion, Instagram, Twitter 등 50개+ 플랫폼 지원
+        <p class="text-sm text-zinc-600 mb-12 slide-up slide-up-delay-2">
+          Canva • Figma • Notion • Instagram • Twitter 외 50개+ 플랫폼
         </p>
         
         <!-- Main Converter Card -->
-        <div class="gradient-border glow-primary p-8 md:p-10 slide-up slide-up-delay-3">
+        <div class="gradient-border glow-subtle p-6 md:p-8 slide-up slide-up-delay-3">
           <!-- URL Input -->
-          <div class="relative mb-6">
-            <div class="absolute left-5 top-1/2 -translate-y-1/2 text-teal-400">
-              <i class="fas fa-link text-xl"></i>
+          <div class="relative mb-5">
+            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
+              <i class="fas fa-link"></i>
             </div>
             <input 
               type="url" 
               id="urlInput"
-              placeholder="🔗 링크를 붙여넣으세요..."
-              class="w-full px-14 py-5 bg-white/5 border-2 border-white/10 rounded-2xl text-lg text-white placeholder-slate-500 focus:outline-none focus:border-teal-500/50 input-glow transition-all"
+              placeholder="링크를 붙여넣으세요..."
+              class="w-full px-11 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none input-glow transition-all"
             >
             <button 
               id="pasteBtn"
-              class="absolute right-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-teal-600/20 text-teal-400 rounded-lg hover:bg-teal-600/30 transition-all text-sm"
+              class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-zinc-800 text-zinc-400 rounded-lg hover:bg-zinc-700 hover:text-zinc-300 transition-all text-sm"
             >
-              <i class="fas fa-paste mr-2"></i>붙여넣기
+              <i class="fas fa-paste mr-1.5"></i>붙여넣기
             </button>
           </div>
           
           <!-- URL Examples -->
-          <div class="text-left text-sm text-slate-500 mb-6 pl-2">
-            <p class="mb-1">예시:</p>
-            <p class="text-slate-600">• canva.com/design/...</p>
-            <p class="text-slate-600">• figma.com/proto/...</p>
-            <p class="text-slate-600">• notion.so/page...</p>
+          <div class="text-left text-xs text-zinc-600 mb-5 pl-1">
+            <span>예: </span>
+            <span class="text-zinc-500">canva.com/design/... • figma.com/proto/... • notion.so/...</span>
           </div>
           
           <!-- Platform Detection -->
-          <div id="platformDetection" class="hidden mb-6">
-            <div class="flex items-center gap-3 p-4 bg-gradient-to-r from-teal-500/10 to-cyan-500/10 rounded-xl border border-teal-500/20 detect-pulse">
-              <span id="platformIcon" class="text-3xl"></span>
+          <div id="platformDetection" class="hidden mb-5">
+            <div class="flex items-center gap-3 p-3 bg-indigo-500/5 rounded-xl border border-indigo-500/10 detect-pulse">
+              <span id="platformIcon" class="text-2xl"></span>
               <div class="text-left">
                 <div class="flex items-center gap-2">
-                  <span class="text-sm text-teal-400">🤖 자동 감지:</span>
-                  <span id="platformName" class="font-semibold text-white"></span>
+                  <span class="text-xs text-indigo-400">자동 감지</span>
+                  <span id="platformName" class="font-medium text-zinc-200 text-sm"></span>
                 </div>
-                <p id="platformInfo" class="text-sm text-slate-400"></p>
+                <p id="platformInfo" class="text-xs text-zinc-500"></p>
               </div>
             </div>
           </div>
           
           <!-- Conversion Options -->
-          <div class="mb-8">
-            <div class="flex items-center gap-2 mb-4 text-left">
-              <i class="fas fa-sliders text-teal-400"></i>
-              <span class="text-slate-300 font-medium">변환 옵션</span>
+          <div class="mb-6">
+            <div class="flex items-center gap-2 mb-3 text-left">
+              <i class="fas fa-sliders text-zinc-500 text-xs"></i>
+              <span class="text-zinc-400 text-sm">변환 옵션</span>
             </div>
             
             <!-- View Mode Selection -->
-            <div class="flex gap-2 mb-4 p-1 bg-white/5 rounded-xl">
-              <button class="view-mode-btn flex-1 py-3 rounded-lg active" data-mode="full">
-                <i class="fas fa-expand mr-2"></i>풀 페이지
+            <div class="flex gap-1.5 mb-3 p-1 bg-zinc-900/50 rounded-lg border border-zinc-800/50">
+              <button class="view-mode-btn flex-1 py-2 rounded-md text-sm border border-transparent active" data-mode="full">
+                <i class="fas fa-expand mr-1.5 text-xs"></i>풀 페이지
               </button>
-              <button class="view-mode-btn flex-1 py-3 rounded-lg text-slate-400" data-mode="mobile">
-                <i class="fas fa-mobile-alt mr-2"></i>모바일뷰
+              <button class="view-mode-btn flex-1 py-2 rounded-md text-sm text-zinc-500 border border-transparent" data-mode="mobile">
+                <i class="fas fa-mobile-alt mr-1.5 text-xs"></i>모바일
               </button>
-              <button class="view-mode-btn flex-1 py-3 rounded-lg text-slate-400" data-mode="desktop">
-                <i class="fas fa-desktop mr-2"></i>데스크탑뷰
+              <button class="view-mode-btn flex-1 py-2 rounded-md text-sm text-zinc-500 border border-transparent" data-mode="desktop">
+                <i class="fas fa-desktop mr-1.5 text-xs"></i>데스크탑
               </button>
             </div>
             
             <!-- Option Checkboxes -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <label class="option-checkbox flex items-center gap-3 p-3 bg-white/5 rounded-xl cursor-pointer">
-                <input type="checkbox" id="highQuality" class="w-5 h-5 rounded accent-teal-500" checked>
-                <span class="text-slate-300">고화질 (300 DPI)</span>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="option-checkbox flex items-center gap-2.5 p-2.5 bg-zinc-900/30 rounded-lg cursor-pointer border border-zinc-800/30">
+                <input type="checkbox" id="highQuality" class="w-4 h-4 rounded" checked>
+                <span class="text-zinc-400 text-sm">고화질 (300 DPI)</span>
               </label>
-              <label class="option-checkbox flex items-center gap-3 p-3 bg-white/5 rounded-xl cursor-pointer">
-                <input type="checkbox" id="multiPage" class="w-5 h-5 rounded accent-teal-500" checked>
-                <span class="text-slate-300">다중 페이지 자동 감지</span>
+              <label class="option-checkbox flex items-center gap-2.5 p-2.5 bg-zinc-900/30 rounded-lg cursor-pointer border border-zinc-800/30">
+                <input type="checkbox" id="multiPage" class="w-4 h-4 rounded" checked>
+                <span class="text-zinc-400 text-sm">다중 페이지 감지</span>
               </label>
-              <label class="option-checkbox flex items-center gap-3 p-3 bg-white/5 rounded-xl cursor-pointer">
-                <input type="checkbox" id="scrollCapture" class="w-5 h-5 rounded accent-teal-500">
-                <span class="text-slate-300">스크롤 캡처 (긴 페이지)</span>
+              <label class="option-checkbox flex items-center gap-2.5 p-2.5 bg-zinc-900/30 rounded-lg cursor-pointer border border-zinc-800/30">
+                <input type="checkbox" id="scrollCapture" class="w-4 h-4 rounded">
+                <span class="text-zinc-400 text-sm">스크롤 캡처</span>
               </label>
-              <label class="option-checkbox flex items-center gap-3 p-3 bg-white/5 rounded-xl cursor-pointer">
-                <input type="checkbox" id="waitInteractive" class="w-5 h-5 rounded accent-teal-500">
-                <span class="text-slate-300">인터랙티브 요소 대기</span>
+              <label class="option-checkbox flex items-center gap-2.5 p-2.5 bg-zinc-900/30 rounded-lg cursor-pointer border border-zinc-800/30">
+                <input type="checkbox" id="waitInteractive" class="w-4 h-4 rounded">
+                <span class="text-zinc-400 text-sm">로딩 대기</span>
               </label>
             </div>
           </div>
@@ -454,67 +453,67 @@ export function mainPage() {
           <!-- Convert Button -->
           <button 
             id="convertBtn"
-            class="w-full py-5 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-2xl text-lg font-bold hover:from-teal-500 hover:to-cyan-500 transition-all btn-shine pulse-glow disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-medium transition-all btn-shine pulse-glow disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-indigo-600"
             disabled
           >
-            <i class="fas fa-rocket mr-3"></i>
-            <span>PDF 변환 시작</span>
+            <i class="fas fa-arrow-right mr-2"></i>
+            <span>PDF 변환</span>
           </button>
         </div>
       </div>
     </section>
     
-    <!-- Progress Modal (Hidden by default) -->
-    <div id="progressModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
-      <div class="gradient-border glow-blue p-8 max-w-md w-full mx-4">
+    <!-- Progress Modal -->
+    <div id="progressModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+      <div class="glass-card p-8 max-w-sm w-full mx-4">
         <div id="progressContent">
           <!-- Processing State -->
           <div id="processingState" class="text-center">
-            <div class="w-20 h-20 mx-auto mb-6 relative">
-              <div class="absolute inset-0 border-4 border-teal-500/20 rounded-full"></div>
-              <div class="absolute inset-0 border-4 border-transparent border-t-teal-500 rounded-full spinner"></div>
+            <div class="w-16 h-16 mx-auto mb-5 relative">
+              <div class="absolute inset-0 border-2 border-zinc-800 rounded-full"></div>
+              <div class="absolute inset-0 border-2 border-transparent border-t-indigo-500 rounded-full spinner"></div>
               <div class="absolute inset-0 flex items-center justify-center">
-                <i class="fas fa-file-pdf text-2xl text-teal-400"></i>
+                <i class="fas fa-file-pdf text-lg text-indigo-400"></i>
               </div>
             </div>
             
-            <h3 class="text-xl font-bold mb-2">변환 진행 중...</h3>
-            <p id="progressPlatform" class="text-slate-400 mb-6"></p>
+            <h3 class="text-lg font-medium mb-1 text-zinc-100">변환 중</h3>
+            <p id="progressPlatform" class="text-sm text-zinc-500 mb-5"></p>
             
-            <div class="relative h-3 bg-white/10 rounded-full overflow-hidden mb-3">
+            <div class="relative h-1.5 bg-zinc-800 rounded-full overflow-hidden mb-3">
               <div 
                 id="progressBar" 
-                class="absolute left-0 top-0 h-full bg-gradient-to-r from-teal-500 to-cyan-500 rounded-full progress-glow transition-all duration-500"
+                class="absolute left-0 top-0 h-full bg-indigo-500 rounded-full progress-glow transition-all duration-300"
                 style="width: 0%"
               ></div>
             </div>
             
-            <p id="progressPercent" class="text-teal-400 font-mono text-lg">0%</p>
-            <p id="progressStatus" class="text-sm text-slate-500 mt-2">페이지 캡처 중...</p>
+            <p id="progressPercent" class="text-indigo-400 font-mono text-sm">0%</p>
+            <p id="progressStatus" class="text-xs text-zinc-600 mt-1">준비 중...</p>
           </div>
           
           <!-- Completed State -->
           <div id="completedState" class="text-center hidden">
-            <div class="w-20 h-20 mx-auto mb-6 bg-emerald-500/20 rounded-full flex items-center justify-center">
-              <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3">
+            <div class="w-16 h-16 mx-auto mb-5 bg-emerald-500/10 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5">
                 <path class="checkmark-animate" d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </div>
             
-            <h3 class="text-2xl font-bold mb-2 text-emerald-400">변환 완료!</h3>
-            <p id="completedInfo" class="text-slate-400 mb-6"></p>
+            <h3 class="text-lg font-medium mb-1 text-emerald-400">완료</h3>
+            <p id="completedInfo" class="text-sm text-zinc-500 mb-5"></p>
             
             <button 
               id="downloadBtn"
-              class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl font-bold hover:from-emerald-400 hover:to-teal-400 transition-all btn-shine mb-3"
+              class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-medium transition-all btn-shine mb-2"
             >
               <i class="fas fa-download mr-2"></i>
-              PDF 다운로드
+              다운로드
             </button>
             
             <button 
               id="newConvertBtn"
-              class="w-full py-3 bg-white/5 border border-white/10 rounded-xl text-slate-400 hover:bg-white/10 transition-all"
+              class="w-full py-2.5 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-zinc-400 text-sm transition-all"
             >
               새로운 변환
             </button>
@@ -522,16 +521,16 @@ export function mainPage() {
           
           <!-- Error State -->
           <div id="errorState" class="text-center hidden">
-            <div class="w-20 h-20 mx-auto mb-6 bg-rose-500/20 rounded-full flex items-center justify-center">
-              <i class="fas fa-exclamation-triangle text-3xl text-rose-400"></i>
+            <div class="w-16 h-16 mx-auto mb-5 bg-red-500/10 rounded-full flex items-center justify-center">
+              <i class="fas fa-times text-2xl text-red-400"></i>
             </div>
             
-            <h3 class="text-xl font-bold mb-2 text-rose-400">변환 실패</h3>
-            <p id="errorMessage" class="text-slate-400 mb-6"></p>
+            <h3 class="text-lg font-medium mb-1 text-red-400">실패</h3>
+            <p id="errorMessage" class="text-sm text-zinc-500 mb-5"></p>
             
             <button 
               id="retryBtn"
-              class="w-full py-4 bg-gradient-to-r from-rose-500 to-orange-500 rounded-xl font-bold hover:from-rose-400 hover:to-orange-400 transition-all btn-shine"
+              class="w-full py-3 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-medium transition-all"
             >
               <i class="fas fa-redo mr-2"></i>
               다시 시도
@@ -543,52 +542,51 @@ export function mainPage() {
     
     <!-- Supported Platforms Section -->
     <section id="platforms" class="py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            <span class="gradient-text">50개+</span> 플랫폼 지원
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl font-semibold mb-2 text-zinc-100">
+            지원 플랫폼
           </h2>
-          <p class="text-slate-400">어떤 링크든 PDF로 변환할 수 있습니다</p>
+          <p class="text-sm text-zinc-500">50개 이상의 플랫폼에서 PDF 변환 가능</p>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="platformGrid">
-          <!-- Platforms will be dynamically loaded -->
+        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2" id="platformGrid">
         </div>
       </div>
     </section>
     
     <!-- Features Section -->
-    <section id="features" class="py-20 px-4 bg-gradient-to-b from-transparent via-teal-900/5 to-transparent">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            왜 <span class="gradient-text">AnyLinkPDF</span>인가요?
+    <section id="features" class="py-20 px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl font-semibold mb-2 text-zinc-100">
+            주요 기능
           </h2>
         </div>
         
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="card-hover p-6 bg-white/5 border border-white/10 rounded-2xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-4">
-              <i class="fas fa-brain text-2xl text-teal-400"></i>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="card-hover p-5 bg-zinc-900/50 border border-zinc-800/50 rounded-xl">
+            <div class="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center mb-3">
+              <i class="fas fa-magic text-indigo-400"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">🤖 AI 자동 감지</h3>
-            <p class="text-slate-400">링크만 붙여넣으면 플랫폼을 자동으로 인식하고 최적의 캡처 전략을 적용합니다.</p>
+            <h3 class="font-medium mb-1 text-zinc-200">자동 감지</h3>
+            <p class="text-sm text-zinc-500">플랫폼을 자동 인식하고 최적의 캡처 방식을 적용합니다.</p>
           </div>
           
-          <div class="card-hover p-6 bg-white/5 border border-white/10 rounded-2xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-xl flex items-center justify-center mb-4">
-              <i class="fas fa-gem text-2xl text-sky-400"></i>
+          <div class="card-hover p-5 bg-zinc-900/50 border border-zinc-800/50 rounded-xl">
+            <div class="w-10 h-10 bg-violet-500/10 rounded-lg flex items-center justify-center mb-3">
+              <i class="fas fa-hd text-violet-400"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">✨ 고품질 출력</h3>
-            <p class="text-slate-400">300 DPI 고해상도 PDF로 출력하여 인쇄용 품질을 보장합니다.</p>
+            <h3 class="font-medium mb-1 text-zinc-200">고품질 출력</h3>
+            <p class="text-sm text-zinc-500">300 DPI 고해상도로 인쇄 품질을 보장합니다.</p>
           </div>
           
-          <div class="card-hover p-6 bg-white/5 border border-white/10 rounded-2xl">
-            <div class="w-14 h-14 bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-xl flex items-center justify-center mb-4">
-              <i class="fas fa-bolt text-2xl text-emerald-400"></i>
+          <div class="card-hover p-5 bg-zinc-900/50 border border-zinc-800/50 rounded-xl">
+            <div class="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-3">
+              <i class="fas fa-bolt text-emerald-400"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">⚡ 빠른 변환</h3>
-            <p class="text-slate-400">최적화된 엔진으로 수십 페이지도 빠르게 PDF로 변환합니다.</p>
+            <h3 class="font-medium mb-1 text-zinc-200">빠른 변환</h3>
+            <p class="text-sm text-zinc-500">최적화된 엔진으로 빠르게 변환합니다.</p>
           </div>
         </div>
       </div>
@@ -596,51 +594,50 @@ export function mainPage() {
     
     <!-- Stats Section -->
     <section class="py-16 px-4">
-      <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div class="p-6">
-            <div class="text-3xl md:text-4xl font-black gradient-text mb-2">50+</div>
-            <div class="text-slate-400">지원 플랫폼</div>
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-4 gap-4 text-center">
+          <div class="p-4">
+            <div class="text-2xl font-bold text-zinc-100 mb-1">50+</div>
+            <div class="text-xs text-zinc-500">플랫폼</div>
           </div>
-          <div class="p-6">
-            <div class="text-3xl md:text-4xl font-black gradient-text-blue mb-2">10배</div>
-            <div class="text-slate-400">더 빠른 속도</div>
+          <div class="p-4">
+            <div class="text-2xl font-bold text-zinc-100 mb-1">10x</div>
+            <div class="text-xs text-zinc-500">속도</div>
           </div>
-          <div class="p-6">
-            <div class="text-3xl md:text-4xl font-black gradient-text mb-2">300</div>
-            <div class="text-slate-400">DPI 고화질</div>
+          <div class="p-4">
+            <div class="text-2xl font-bold text-zinc-100 mb-1">300</div>
+            <div class="text-xs text-zinc-500">DPI</div>
           </div>
-          <div class="p-6">
-            <div class="text-3xl md:text-4xl font-black gradient-text-blue mb-2">∞</div>
-            <div class="text-slate-400">페이지 지원</div>
+          <div class="p-4">
+            <div class="text-2xl font-bold text-zinc-100 mb-1">∞</div>
+            <div class="text-xs text-zinc-500">페이지</div>
           </div>
         </div>
       </div>
     </section>
     
     <!-- Footer -->
-    <footer class="py-12 px-4 border-t border-white/10">
-      <div class="max-w-6xl mx-auto text-center">
-        <div class="flex items-center justify-center gap-3 mb-4">
-          <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg flex items-center justify-center">
-            <i class="fas fa-file-pdf text-white text-sm"></i>
+    <footer class="py-8 px-4 border-t border-zinc-800/50">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <div class="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center">
+            <i class="fas fa-file-pdf text-white text-xs"></i>
           </div>
-          <span class="text-lg font-bold">AnyLink<span class="text-teal-400">PDF</span></span>
+          <span class="text-sm font-medium text-zinc-400">AnyLinkPDF</span>
         </div>
-        <p class="text-slate-500 text-sm">
-          © 2024 AnyLinkPDF. 어떤 링크든 PDF로.
+        <p class="text-xs text-zinc-600">
+          © 2024 AnyLinkPDF
         </p>
       </div>
     </footer>
   </div>
 
   <script>
-    // ============ Application State ============
     const state = {
       url: '',
       platform: null,
       jobId: null,
-      status: 'idle', // idle, analyzing, processing, completed, error
+      status: 'idle',
       progress: 0,
       options: {
         viewMode: 'full',
@@ -651,7 +648,6 @@ export function mainPage() {
       }
     };
     
-    // ============ DOM Elements ============
     const urlInput = document.getElementById('urlInput');
     const pasteBtn = document.getElementById('pasteBtn');
     const convertBtn = document.getElementById('convertBtn');
@@ -669,78 +665,56 @@ export function mainPage() {
     const errorState = document.getElementById('errorState');
     const platformGrid = document.getElementById('platformGrid');
     
-    // ============ Create Particles ============
     function createParticles() {
       const container = document.getElementById('particles');
-      const particleCount = 30;
-      
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < 20; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 15 + 's';
-        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        
-        // Soft teal/cyan colors
-        const colors = [
-          'rgba(20, 184, 166, 0.2)',
-          'rgba(6, 182, 212, 0.2)',
-          'rgba(14, 165, 233, 0.15)',
-          'rgba(56, 189, 248, 0.15)'
-        ];
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.width = (Math.random() * 4 + 2) + 'px';
-        particle.style.height = particle.style.width;
-        
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
         container.appendChild(particle);
       }
     }
     
-    // ============ Create Confetti ============
     function createConfetti() {
-      // Softer, eye-friendly colors
-      const colors = ['#14b8a6', '#06b6d4', '#0ea5e9', '#10b981', '#38bdf8', '#22d3ee'];
-      
-      for (let i = 0; i < 50; i++) {
+      const colors = ['#6366f1', '#8b5cf6', '#a855f7', '#10b981', '#3b82f6'];
+      for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 0.5 + 's';
-        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        
+        confetti.style.animationDelay = Math.random() * 0.3 + 's';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
         document.body.appendChild(confetti);
-        
-        setTimeout(() => confetti.remove(), 3000);
+        setTimeout(() => confetti.remove(), 2500);
       }
     }
     
-    // ============ Load Platforms ============
-    async function loadPlatforms() {
+    function loadPlatforms() {
       const platforms = [
-        { icon: '🎨', name: 'Canva', color: '#00C4CC' },
-        { icon: '🎯', name: 'Figma', color: '#F24E1E' },
-        { icon: '📝', name: 'Notion', color: '#000000' },
-        { icon: '📊', name: 'Google Slides', color: '#FBBC04' },
-        { icon: '🗺️', name: 'Miro', color: '#FFD02F' },
-        { icon: '📸', name: 'Instagram', color: '#E4405F' },
-        { icon: '🐦', name: 'Twitter/X', color: '#1DA1F2' },
-        { icon: '💼', name: 'LinkedIn', color: '#0A66C2' },
-        { icon: '📰', name: 'Medium', color: '#000000' },
-        { icon: '💻', name: 'GitHub', color: '#181717' },
-        { icon: '🎬', name: 'YouTube', color: '#FF0000' },
-        { icon: '🌐', name: '웹페이지', color: '#14b8a6' },
+        { icon: '🎨', name: 'Canva' },
+        { icon: '🎯', name: 'Figma' },
+        { icon: '📝', name: 'Notion' },
+        { icon: '📊', name: 'Slides' },
+        { icon: '🗺️', name: 'Miro' },
+        { icon: '📸', name: 'Instagram' },
+        { icon: '𝕏', name: 'Twitter' },
+        { icon: '💼', name: 'LinkedIn' },
+        { icon: '📰', name: 'Medium' },
+        { icon: '💻', name: 'GitHub' },
+        { icon: '🎬', name: 'YouTube' },
+        { icon: '🌐', name: 'Web' },
       ];
       
       platformGrid.innerHTML = platforms.map(p => \`
-        <div class="platform-badge p-4 bg-white/5 border border-white/10 rounded-xl text-center">
-          <div class="text-3xl mb-2">\${p.icon}</div>
-          <div class="text-sm text-slate-300">\${p.name}</div>
+        <div class="platform-badge p-3 bg-zinc-900/30 border border-zinc-800/50 rounded-lg text-center">
+          <div class="text-xl mb-1">\${p.icon}</div>
+          <div class="text-xs text-zinc-500">\${p.name}</div>
         </div>
       \`).join('');
     }
     
-    // ============ Analyze URL ============
     async function analyzeUrl(url) {
       if (!url || url.length < 10) {
         platformDetection.classList.add('hidden');
@@ -764,22 +738,12 @@ export function mainPage() {
           platformIcon.textContent = data.icon;
           platformName.textContent = data.name;
           
-          let infoText = '';
-          if (data.type === 'multi_page') {
-            infoText = data.estimatedPages > 0 ? \`약 \${data.estimatedPages}페이지 감지\` : '다중 페이지 문서';
-          } else if (data.type === 'scrollable') {
-            infoText = '스크롤 캡처 모드';
-          } else if (data.type === 'interactive') {
-            infoText = '인터랙티브 콘텐츠';
-          } else {
-            infoText = data.type;
-          }
+          let infoText = data.type === 'multi_page' 
+            ? (data.estimatedPages > 0 ? \`\${data.estimatedPages}페이지\` : '다중 페이지')
+            : data.type === 'scrollable' ? '스크롤 캡처' : data.type;
           platformInfo.textContent = infoText;
           
           platformDetection.classList.remove('hidden');
-          platformDetection.classList.add('detect-pulse');
-          setTimeout(() => platformDetection.classList.remove('detect-pulse'), 500);
-          
           convertBtn.disabled = false;
         }
       } catch (error) {
@@ -787,55 +751,38 @@ export function mainPage() {
       }
     }
     
-    // ============ Start Conversion ============
     async function startConversion() {
       if (!state.url || !state.platform) return;
       
-      // Show modal
       progressModal.classList.remove('hidden');
       processingState.classList.remove('hidden');
       completedState.classList.add('hidden');
       errorState.classList.add('hidden');
       
-      // Reset progress
       state.progress = 0;
       progressBar.style.width = '0%';
       progressPercent.textContent = '0%';
-      progressPlatform.textContent = \`\${state.platform.icon} \${state.platform.name} 변환 중\`;
+      progressPlatform.textContent = \`\${state.platform.icon} \${state.platform.name}\`;
       
       try {
-        // Start conversion
         const response = await fetch('/api/convert', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            url: state.url,
-            options: state.options
-          })
+          body: JSON.stringify({ url: state.url, options: state.options })
         });
         
         const data = await response.json();
         state.jobId = data.jobId;
-        
-        // Poll for progress
         pollProgress();
-        
       } catch (error) {
-        showError('변환을 시작할 수 없습니다');
+        showError('변환 실패');
       }
     }
     
-    // ============ Poll Progress ============
     async function pollProgress() {
       if (!state.jobId) return;
       
-      const statuses = [
-        '페이지 로딩 중...',
-        '콘텐츠 분석 중...',
-        '페이지 캡처 중...',
-        'PDF 생성 중...',
-        '최적화 중...'
-      ];
+      const statuses = ['로딩 중...', '분석 중...', '캡처 중...', '생성 중...', '완료 중...'];
       
       const poll = async () => {
         try {
@@ -845,116 +792,85 @@ export function mainPage() {
           state.progress = Math.min(data.progress, 100);
           progressBar.style.width = state.progress + '%';
           progressPercent.textContent = Math.round(state.progress) + '%';
-          
-          const statusIndex = Math.floor(state.progress / 25);
-          progressStatus.textContent = statuses[Math.min(statusIndex, statuses.length - 1)];
+          progressStatus.textContent = statuses[Math.min(Math.floor(state.progress / 25), 4)];
           
           if (data.status === 'completed') {
             showCompleted(data);
           } else if (data.status === 'error') {
             showError(data.error);
           } else {
-            setTimeout(poll, 500);
+            setTimeout(poll, 400);
           }
         } catch (error) {
-          showError('진행 상태를 확인할 수 없습니다');
+          showError('오류 발생');
         }
       };
       
       poll();
     }
     
-    // ============ Show Completed ============
     function showCompleted(data) {
       processingState.classList.add('hidden');
       completedState.classList.remove('hidden');
-      
-      document.getElementById('completedInfo').textContent = 
-        \`\${state.platform.icon} \${state.platform.name}에서 PDF 생성 완료\`;
-      
+      document.getElementById('completedInfo').textContent = \`\${state.platform.name} PDF 생성 완료\`;
       createConfetti();
     }
     
-    // ============ Show Error ============
     function showError(message) {
       processingState.classList.add('hidden');
       errorState.classList.remove('hidden');
       document.getElementById('errorMessage').textContent = message;
     }
     
-    // ============ Close Modal ============
     function closeModal() {
       progressModal.classList.add('hidden');
       state.jobId = null;
     }
     
-    // ============ Event Listeners ============
-    
-    // URL Input
     let analyzeTimeout;
     urlInput.addEventListener('input', (e) => {
       clearTimeout(analyzeTimeout);
-      analyzeTimeout = setTimeout(() => analyzeUrl(e.target.value), 500);
+      analyzeTimeout = setTimeout(() => analyzeUrl(e.target.value), 400);
     });
     
-    urlInput.addEventListener('paste', (e) => {
-      setTimeout(() => analyzeUrl(urlInput.value), 100);
+    urlInput.addEventListener('paste', () => {
+      setTimeout(() => analyzeUrl(urlInput.value), 50);
     });
     
-    // Paste Button
     pasteBtn.addEventListener('click', async () => {
       try {
         const text = await navigator.clipboard.readText();
         urlInput.value = text;
         analyzeUrl(text);
-      } catch (err) {
-        console.error('Clipboard access denied');
-      }
+      } catch (err) {}
     });
     
-    // Convert Button
     convertBtn.addEventListener('click', startConversion);
     
-    // View Mode Buttons
     document.querySelectorAll('.view-mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.view-mode-btn').forEach(b => {
           b.classList.remove('active');
-          b.classList.add('text-slate-400');
+          b.classList.add('text-zinc-500');
         });
         btn.classList.add('active');
-        btn.classList.remove('text-slate-400');
+        btn.classList.remove('text-zinc-500');
         state.options.viewMode = btn.dataset.mode;
       });
     });
     
-    // Option Checkboxes
-    document.getElementById('highQuality').addEventListener('change', (e) => {
-      state.options.highQuality = e.target.checked;
-    });
-    document.getElementById('multiPage').addEventListener('change', (e) => {
-      state.options.multiPage = e.target.checked;
-    });
-    document.getElementById('scrollCapture').addEventListener('change', (e) => {
-      state.options.scrollCapture = e.target.checked;
-    });
-    document.getElementById('waitInteractive').addEventListener('change', (e) => {
-      state.options.waitInteractive = e.target.checked;
-    });
+    document.getElementById('highQuality').addEventListener('change', (e) => state.options.highQuality = e.target.checked);
+    document.getElementById('multiPage').addEventListener('change', (e) => state.options.multiPage = e.target.checked);
+    document.getElementById('scrollCapture').addEventListener('change', (e) => state.options.scrollCapture = e.target.checked);
+    document.getElementById('waitInteractive').addEventListener('change', (e) => state.options.waitInteractive = e.target.checked);
     
-    // Download Button
     document.getElementById('downloadBtn').addEventListener('click', async () => {
       if (!state.jobId) return;
-      
-      // In real implementation, this would download the actual PDF
-      // For demo, we show an alert
       const response = await fetch(\`/api/download/\${state.jobId}\`);
       const data = await response.json();
-      
-      alert(\`PDF 파일명: \${data.filename}\\n(실제 구현에서는 PDF가 다운로드됩니다)\`);
+      alert(\`PDF: \${data.filename}\`);
     });
     
-    // New Convert Button
     document.getElementById('newConvertBtn').addEventListener('click', () => {
       closeModal();
       urlInput.value = '';
@@ -964,34 +880,22 @@ export function mainPage() {
       state.platform = null;
     });
     
-    // Retry Button
     document.getElementById('retryBtn').addEventListener('click', () => {
       closeModal();
-      if (state.url) {
-        startConversion();
-      }
+      if (state.url) startConversion();
     });
     
-    // Close modal on backdrop click
     progressModal.addEventListener('click', (e) => {
-      if (e.target === progressModal) {
-        // Only close if completed or error
-        if (!processingState.classList.contains('hidden')) return;
-        closeModal();
-      }
+      if (e.target === progressModal && processingState.classList.contains('hidden')) closeModal();
     });
     
-    // ============ Initialize ============
     createParticles();
     loadPlatforms();
     
-    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+      anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
       });
     });
   </script>
