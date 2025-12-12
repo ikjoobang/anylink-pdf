@@ -61,7 +61,7 @@ export function mainPage() {
     /* Glowing border animation */
     .glow-border {
       position: relative;
-      background: #0a0a0a;
+      background: rgba(10, 15, 20, 0.95);
       border-radius: 20px;
     }
     .glow-border::before {
@@ -73,8 +73,8 @@ export function mainPage() {
       z-index: -1;
       background-size: 400% 400%;
       animation: borderGlow 6s ease infinite;
-      filter: blur(8px);
-      opacity: 0.7;
+      filter: blur(15px);
+      opacity: 0.6;
     }
     .glow-border::after {
       content: '';
@@ -188,9 +188,13 @@ export function mainPage() {
     
     /* View mode active */
     .view-mode-btn.active {
-      background: linear-gradient(135deg, rgba(0, 229, 229, 0.2), rgba(0, 230, 118, 0.2));
-      border-color: #00E5E5;
+      background: linear-gradient(135deg, rgba(0, 229, 229, 0.25), rgba(0, 230, 118, 0.2));
+      border-color: rgba(0, 229, 229, 0.5);
       color: #00E5E5;
+    }
+    .view-mode-btn:not(.active):hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #e5e5e5;
     }
     
     /* Spinner */
@@ -349,19 +353,19 @@ export function mainPage() {
               type="url" 
               id="urlInput"
               placeholder="링크를 붙여넣으세요..."
-              class="w-full px-12 py-4 bg-black/50 border border-gray-800 rounded-xl text-white placeholder-gray-600 focus:outline-none input-glow transition-all"
+              class="w-full px-12 py-4 bg-gray-900/80 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none input-glow transition-all"
             >
             <button 
               id="pasteBtn"
-              class="absolute right-3 top-1/2 -translate-y-1/2 px-4 py-2 bg-gray-900 text-gray-400 rounded-lg hover:bg-gray-800 hover:text-cyan transition-all text-sm border border-gray-800"
+              class="absolute right-3 top-1/2 -translate-y-1/2 px-4 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-cyan transition-all text-sm border border-gray-600"
             >
               <i class="fas fa-paste mr-2"></i>붙여넣기
             </button>
           </div>
           
           <!-- Examples -->
-          <div class="text-left text-xs text-gray-600 mb-5 pl-1">
-            예: <span class="text-gray-500">canva.com/design/... • figma.com/proto/... • notion.so/...</span>
+          <div class="text-left text-xs text-gray-400 mb-5 pl-1">
+            예: <span class="text-gray-300">canva.com/design/... • figma.com/proto/... • notion.so/...</span>
           </div>
           
           <!-- Platform Detection -->
@@ -381,40 +385,40 @@ export function mainPage() {
           <!-- Options -->
           <div class="mb-6">
             <div class="flex items-center gap-2 mb-3 text-left">
-              <i class="fas fa-sliders text-gray-500 text-xs"></i>
-              <span class="text-gray-400 text-sm">변환 옵션</span>
+              <i class="fas fa-sliders text-cyan text-xs"></i>
+              <span class="text-gray-200 text-sm font-medium">변환 옵션</span>
             </div>
             
             <!-- View Mode -->
-            <div class="flex gap-2 mb-3 p-1 bg-black/30 rounded-lg border border-gray-800">
-              <button class="view-mode-btn flex-1 py-2.5 rounded-md text-sm border border-transparent active" data-mode="full">
+            <div class="flex gap-2 mb-3 p-1.5 bg-gray-900/80 rounded-xl border border-gray-700">
+              <button class="view-mode-btn flex-1 py-2.5 rounded-lg text-sm font-medium border border-transparent active" data-mode="full">
                 <i class="fas fa-expand mr-2 text-xs"></i>풀 페이지
               </button>
-              <button class="view-mode-btn flex-1 py-2.5 rounded-md text-sm text-gray-500 border border-transparent" data-mode="mobile">
+              <button class="view-mode-btn flex-1 py-2.5 rounded-lg text-sm font-medium text-gray-400 border border-transparent" data-mode="mobile">
                 <i class="fas fa-mobile-alt mr-2 text-xs"></i>모바일
               </button>
-              <button class="view-mode-btn flex-1 py-2.5 rounded-md text-sm text-gray-500 border border-transparent" data-mode="desktop">
+              <button class="view-mode-btn flex-1 py-2.5 rounded-lg text-sm font-medium text-gray-400 border border-transparent" data-mode="desktop">
                 <i class="fas fa-desktop mr-2 text-xs"></i>데스크탑
               </button>
             </div>
             
             <!-- Checkboxes -->
             <div class="grid grid-cols-2 gap-2">
-              <label class="flex items-center gap-3 p-3 bg-black/30 rounded-lg cursor-pointer border border-gray-800 hover:border-gray-700 transition-colors">
+              <label class="flex items-center gap-3 p-3.5 bg-gray-900/80 rounded-xl cursor-pointer border border-gray-700 hover:border-cyan/50 transition-colors">
                 <input type="checkbox" id="highQuality" class="w-4 h-4 accent-cyan-500 rounded" checked>
-                <span class="text-gray-400 text-sm">고화질 (300 DPI)</span>
+                <span class="text-gray-200 text-sm">고화질 (300 DPI)</span>
               </label>
-              <label class="flex items-center gap-3 p-3 bg-black/30 rounded-lg cursor-pointer border border-gray-800 hover:border-gray-700 transition-colors">
+              <label class="flex items-center gap-3 p-3.5 bg-gray-900/80 rounded-xl cursor-pointer border border-gray-700 hover:border-cyan/50 transition-colors">
                 <input type="checkbox" id="multiPage" class="w-4 h-4 accent-cyan-500 rounded" checked>
-                <span class="text-gray-400 text-sm">다중 페이지 감지</span>
+                <span class="text-gray-200 text-sm">다중 페이지 감지</span>
               </label>
-              <label class="flex items-center gap-3 p-3 bg-black/30 rounded-lg cursor-pointer border border-gray-800 hover:border-gray-700 transition-colors">
+              <label class="flex items-center gap-3 p-3.5 bg-gray-900/80 rounded-xl cursor-pointer border border-gray-700 hover:border-cyan/50 transition-colors">
                 <input type="checkbox" id="scrollCapture" class="w-4 h-4 accent-cyan-500 rounded">
-                <span class="text-gray-400 text-sm">스크롤 캡처</span>
+                <span class="text-gray-200 text-sm">스크롤 캡처</span>
               </label>
-              <label class="flex items-center gap-3 p-3 bg-black/30 rounded-lg cursor-pointer border border-gray-800 hover:border-gray-700 transition-colors">
+              <label class="flex items-center gap-3 p-3.5 bg-gray-900/80 rounded-xl cursor-pointer border border-gray-700 hover:border-cyan/50 transition-colors">
                 <input type="checkbox" id="waitInteractive" class="w-4 h-4 accent-cyan-500 rounded">
-                <span class="text-gray-400 text-sm">로딩 대기</span>
+                <span class="text-gray-200 text-sm">로딩 대기</span>
               </label>
             </div>
           </div>
