@@ -368,6 +368,33 @@ export function mainPage() {
             예: <span class="text-gray-300">canva.com/design/... • figma.com/proto/... • notion.so/...</span>
           </div>
           
+          <!-- Gemini API Key Input -->
+          <div class="mb-5">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-key text-purple text-xs"></i>
+                <span class="text-gray-400 text-xs">Gemini API Key</span>
+              </div>
+              <button id="toggleApiKey" class="text-xs text-gray-500 hover:text-cyan transition-colors">
+                <i class="fas fa-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+            <input 
+              type="password" 
+              id="geminiApiKey"
+              placeholder="Gemini API 키를 입력하세요..."
+              class="w-full px-4 py-3 bg-gray-900/80 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none input-glow transition-all text-sm"
+            >
+            <div class="flex items-center justify-between mt-2 text-xs">
+              <span id="apiKeyStatus" class="text-gray-600">
+                <i class="fas fa-info-circle mr-1"></i>API 키가 필요합니다
+              </span>
+              <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-cyan hover:underline">
+                API 키 발급받기 →
+              </a>
+            </div>
+          </div>
+          
           <!-- Platform Detection -->
           <div id="platformDetection" class="hidden mb-5">
             <div class="flex items-center gap-3 p-4 bg-cyan/5 rounded-xl border border-cyan/20 detect-pop">
@@ -731,6 +758,43 @@ export function mainPage() {
     function closeModal() {
       $('progressModal').classList.add('hidden');
       state.jobId = null;
+    }
+    
+    // Gemini API Key
+    function updateApiKeyStatus() {
+      const apiKey = $('geminiApiKey').value.trim();
+      const status = $('apiKeyStatus');
+      if (apiKey.length > 0) {
+        if (apiKey.length >= 30) {
+          status.innerHTML = '<i class="fas fa-check-circle mr-1 text-green"></i><span class="text-green">API 키 설정됨</span>';
+          localStorage.setItem('gemini_api_key', apiKey);
+        } else {
+          status.innerHTML = '<i class="fas fa-exclamation-circle mr-1 text-pink"></i><span class="text-pink">유효하지 않은 키</span>';
+        }
+      } else {
+        status.innerHTML = '<i class="fas fa-info-circle mr-1"></i>API 키가 필요합니다';
+      }
+    }
+    
+    $('geminiApiKey').addEventListener('input', updateApiKeyStatus);
+    
+    $('toggleApiKey').addEventListener('click', () => {
+      const input = $('geminiApiKey');
+      const icon = $('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fas fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fas fa-eye';
+      }
+    });
+    
+    // Load saved API key
+    const savedApiKey = localStorage.getItem('gemini_api_key');
+    if (savedApiKey) {
+      $('geminiApiKey').value = savedApiKey;
+      updateApiKeyStatus();
     }
     
     // Event listeners

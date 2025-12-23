@@ -1,19 +1,16 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { serveStatic } from 'hono/cloudflare-pages'
 import { mainPage } from './pages/main'
+import { settingsPage } from './pages/settings'
 
 type Bindings = {
-  // Add your bindings here if needed
+  GEMINI_API_KEY?: string
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
 
 // Enable CORS
 app.use('/api/*', cors())
-
-// Serve static files
-app.use('/static/*', serveStatic())
 
 // ============ Link Analysis API ============
 interface PlatformConfig {
@@ -141,7 +138,6 @@ function analyzeLink(url: string): PlatformConfig {
     }
   }
   
-  // Generic webpage
   return {
     platform: 'webpage',
     icon: '🌐',
@@ -151,6 +147,36 @@ function analyzeLink(url: string): PlatformConfig {
     color: '#6366F1'
   }
 }
+
+// ============ Health Check ============
+app.get('/api/health', (c) => {
+  return c.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+    service: 'AnyLinkPDF'
+  })
+})
+
+// ============ API Documentation ============
+app.get('/api/docs', (c) => {
+  return c.json({
+    name: 'AnyLinkPDF API',
+    version: '1.0.0',
+    description: 'Universal Link to PDF Converter API',
+    endpoints: [
+      { method: 'GET', path: '/api/health', description: 'Health check' },
+      { method: 'GET', path: '/api/docs', description: 'API documentation' },
+      { method: 'POST', path: '/api/analyze', description: 'Analyze URL and detect platform' },
+      { method: 'POST', path: '/api/convert', description: 'Start PDF conversion' },
+      { method: 'GET', path: '/api/status/:jobId', description: 'Check conversion status' },
+      { method: 'GET', path: '/api/download/:jobId', description: 'Download converted PDF' },
+      { method: 'GET', path: '/api/platforms', description: 'List supported platforms' },
+      { method: 'POST', path: '/api/settings', description: 'Save settings (Gemini API key)' },
+      { method: 'GET', path: '/api/settings', description: 'Get settings status' }
+    ]
+  })
+})
 
 // API: Analyze link
 app.post('/api/analyze', async (c) => {
@@ -163,12 +189,11 @@ app.post('/api/analyze', async (c) => {
     
     const analysis = analyzeLink(url)
     
-    // Estimate pages based on platform
     let estimatedPages = 1
     if (analysis.type === 'multi_page') {
-      estimatedPages = Math.floor(Math.random() * 20) + 5 // Simulated
+      estimatedPages = Math.floor(Math.random() * 20) + 5
     } else if (analysis.type === 'scrollable') {
-      estimatedPages = -1 // Indicates scroll-based capture
+      estimatedPages = -1
     }
     
     return c.json({
@@ -182,7 +207,7 @@ app.post('/api/analyze', async (c) => {
   }
 })
 
-// Store for conversion jobs (in production, use D1 or KV)
+// Store for conversion jobs
 const conversionJobs = new Map<string, {
   status: string
   progress: number
@@ -193,6 +218,38 @@ const conversionJobs = new Map<string, {
   pdfUrl?: string
   error?: string
 }>()
+
+// In-memory settings store (in production, use KV)
+let settingsStore: { geminiApiKey?: string } = {}
+
+// API: Save settings
+app.post('/api/settings', async (c) => {
+  try {
+    const { geminiApiKey } = await c.req.json()
+    
+    if (geminiApiKey) {
+      settingsStore.geminiApiKey = geminiApiKey
+    }
+    
+    return c.json({
+      success: true,
+      message: 'Settings saved successfully',
+      hasGeminiKey: !!settingsStore.geminiApiKey
+    })
+  } catch (error) {
+    return c.json({ error: 'Invalid request' }, 400)
+  }
+})
+
+// API: Get settings status
+app.get('/api/settings', (c) => {
+  return c.json({
+    hasGeminiKey: !!settingsStore.geminiApiKey,
+    geminiKeyPreview: settingsStore.geminiApiKey 
+      ? settingsStore.geminiApiKey.substring(0, 10) + '...' 
+      : null
+  })
+})
 
 // API: Start conversion
 app.post('/api/convert', async (c) => {
@@ -206,7 +263,6 @@ app.post('/api/convert', async (c) => {
     const analysis = analyzeLink(url)
     const jobId = `job_${Date.now()}_${Math.random().toString(36).substring(7)}`
     
-    // Initialize job
     conversionJobs.set(jobId, {
       status: 'processing',
       progress: 0,
@@ -215,8 +271,7 @@ app.post('/api/convert', async (c) => {
       startedAt: new Date().toISOString()
     })
     
-    // Simulate conversion progress (in real app, this would be a background worker)
-    // For demo purposes, we'll complete immediately with a simulated PDF URL
+    // Simulate conversion progress
     setTimeout(() => {
       const job = conversionJobs.get(jobId)
       if (job) {
@@ -246,7 +301,6 @@ app.get('/api/status/:jobId', async (c) => {
     return c.json({ error: 'Job not found' }, 404)
   }
   
-  // Simulate progress update
   if (job.status === 'processing' && job.progress < 100) {
     job.progress = Math.min(job.progress + Math.random() * 30, 99)
   }
@@ -263,8 +317,6 @@ app.get('/api/download/:jobId', async (c) => {
     return c.json({ error: 'PDF not ready' }, 404)
   }
   
-  // In real implementation, this would serve the actual PDF file
-  // For demo, we return a message
   return c.json({
     message: 'PDF ready for download',
     filename: `${job.platform}_export_${Date.now()}.pdf`,
@@ -282,7 +334,6 @@ app.get('/api/platforms', async (c) => {
     type: config.type
   }))
   
-  // Add generic webpage
   platforms.push({
     id: 'webpage',
     name: '웹페이지',
@@ -294,9 +345,21 @@ app.get('/api/platforms', async (c) => {
   return c.json(platforms)
 })
 
+// ============ Pages ============
+
 // Main page
 app.get('/', (c) => {
   return c.html(mainPage())
+})
+
+// Settings/Admin page
+app.get('/settings', (c) => {
+  return c.html(settingsPage())
+})
+
+// Admin alias
+app.get('/admin', (c) => {
+  return c.redirect('/settings')
 })
 
 export default app
