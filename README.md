@@ -6,8 +6,9 @@
 - **Tech Stack**: Hono + TypeScript + TailwindCSS (Cloudflare Pages)
 
 ## URLs
+- **Production**: https://anylink-pdf.pages.dev
 - **Sandbox Preview**: https://3000-irgxzq1x875s9jxkfr9t8-5c13a017.sandbox.novita.ai
-- **Production**: (배포 후 업데이트 예정)
+- **GitHub**: https://github.com/ikjoobang/anylink-pdf
 
 ## Features
 
@@ -18,9 +19,10 @@
    - 플랫폼별 최적 캡처 전략 자동 선택
 
 2. **모던 UI/UX**
-   - 다크 테마 그라데이션 디자인
-   - 플로팅 파티클 애니메이션
-   - 부드러운 트랜지션 효과
+   - 사이버펑크 다크 테마 (Cyan, Pink, Green, Purple)
+   - 플로팅 Orb 애니메이션
+   - 그라데이션 글로우 효과
+   - 부드러운 트랜지션
    - 반응형 레이아웃
 
 3. **변환 옵션**
@@ -30,7 +32,12 @@
    - 스크롤 캡처 (긴 페이지)
    - 인터랙티브 요소 대기
 
-4. **진행 상태 UI**
+4. **Gemini API 키 설정**
+   - 사용자별 API 키 입력 필드
+   - LocalStorage 저장으로 편의성 제공
+   - 키 유효성 실시간 검증
+
+5. **진행 상태 UI**
    - 실시간 진행률 표시
    - 애니메이션 프로그레스 바
    - 완료 시 confetti 효과
@@ -57,7 +64,7 @@
 
 ```bash
 # URL 분석
-curl -X POST /api/analyze \
+curl -X POST https://anylink-pdf.pages.dev/api/analyze \
   -H "Content-Type: application/json" \
   -d '{"url":"https://www.canva.com/design/..."}'
 
@@ -129,11 +136,12 @@ curl -X POST /api/analyze \
 ## User Guide
 
 ### 사용 방법
-1. 웹사이트 접속
-2. 변환하고 싶은 웹 링크를 입력창에 붙여넣기
-3. 플랫폼이 자동 감지되면 변환 옵션 선택
-4. "PDF 변환 시작" 버튼 클릭
-5. 변환 완료 후 PDF 다운로드
+1. 웹사이트 접속 (https://anylink-pdf.pages.dev)
+2. Gemini API 키 입력 (최초 1회)
+3. 변환하고 싶은 웹 링크를 입력창에 붙여넣기
+4. 플랫폼이 자동 감지되면 변환 옵션 선택
+5. "PDF 변환" 버튼 클릭
+6. 변환 완료 후 PDF 다운로드
 
 ### 지원되는 URL 형식
 - `https://www.canva.com/design/...`
@@ -180,5 +188,6 @@ webapp/
 
 ## Deployment
 - **Platform**: Cloudflare Pages
-- **Status**: ✅ Development Ready
-- **Last Updated**: 2024-12-12
+- **Project Name**: anylink-pdf
+- **Status**: ✅ Active
+- **Last Updated**: 2024-12-23
